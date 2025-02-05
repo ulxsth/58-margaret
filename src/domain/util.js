@@ -5,5 +5,5 @@
  * @return 「あい」から始まる単語
  */
 function getRandomAI() {
-
+  return "愛"
 }
