@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "58-margaret",
-  "main": "src/index.js",
+  "main": "src/app.js",
   "compatibility_date": "2025-02-05"
 }
