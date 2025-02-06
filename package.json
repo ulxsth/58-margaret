@@ -1,16 +1,16 @@
 {
-  "name": "58-margaret",
-  "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy --minify",
-    "format:fix": "npx @biomejs/biome check"
-  },
-  "dependencies": {
-    "hono": "^4.6.20"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
-    "@cloudflare/workers-types": "^4.20250109.0",
-    "wrangler": "^3.101.0"
-  }
+	"name": "58-margaret",
+	"scripts": {
+		"dev": "wrangler dev",
+		"deploy": "wrangler deploy --minify",
+		"format:fix": "npx @biomejs/biome check --write"
+	},
+	"dependencies": {
+		"hono": "^4.6.20"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.4",
+		"@cloudflare/workers-types": "^4.20250109.0",
+		"wrangler": "^3.101.0"
+	}
 }

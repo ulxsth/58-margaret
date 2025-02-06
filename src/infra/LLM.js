@@ -1,5 +1,4 @@
-import fetch from "node-fetch"
-
+import fetch from "node-fetch";
 
 /**
  * LLM API に問い合わせる関数。
@@ -10,12 +9,12 @@ import fetch from "node-fetch"
  * @throws {Error} - APIエラー発生時
  */
 export async function askLLM(model, prompt, options = {}) {
-  switch (model) {
-    case "gpt":
-      return await askGPT(prompt, options);
-    default:
-      throw new Error(`Unsupported model: ${model}`);
-  }
+	switch (model) {
+		case "gpt":
+			return await askGPT(prompt, options);
+		default:
+			throw new Error(`Unsupported model: ${model}`);
+	}
 }
 
 async function askGPT() {}

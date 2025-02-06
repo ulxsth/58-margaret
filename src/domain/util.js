@@ -1,11 +1,11 @@
 /**
  * 「あい」から始まる単語をランダムに返す関数。
  * （例. 愛、アイス、アインシュタイン）
- * 
+ *
  * @return 「あい」から始まる単語
  */
 function getRandomAI() {
-  return "愛"
+	return "愛";
 }
 
 /**
@@ -15,5 +15,5 @@ function getRandomAI() {
  * @return {boolean} 指定した文字で始まっているかどうか
  */
 function startsWithHiragana(text, excepted) {
-  return true;
+	return true;
 }
