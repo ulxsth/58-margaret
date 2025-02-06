@@ -1,16 +1,15 @@
 {
 	"name": "58-margaret",
+	"type": "module",
 	"scripts": {
-		"dev": "wrangler dev",
-		"deploy": "wrangler deploy --minify",
+		"dev": "nodemon src/app.js",
 		"format:fix": "npx @biomejs/biome check --write"
-	},
-	"dependencies": {
-		"hono": "^4.6.20"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
-		"@cloudflare/workers-types": "^4.20250109.0",
-		"wrangler": "^3.101.0"
+		"nodemon": "^3.1.9"
+	},
+	"dependencies": {
+		"express": "^4.21.2"
 	}
 }
