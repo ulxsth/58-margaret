@@ -41,3 +41,4 @@ npm run dev
 4. `Ctrl + C` を同時押しするか、コンソールに "x" と入力するとサーバーが停止します
 
 # Credit
+- yotu
