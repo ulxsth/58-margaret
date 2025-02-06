@@ -26,7 +26,7 @@ AIに採点させる<br>
   - AIのコメント付きでスコア表示
 
 # 技術構成
-Express + ejs
+Express + ejs 
 
 # 起動方法
 ## ローカル
