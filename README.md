@@ -45,3 +45,4 @@ npm run dev
 - maika
 - hayashu
 - yotu
+- tenpa
