@@ -28,10 +28,9 @@ async function getRandomAI() {
 			// ページからランダムに単語取得(読み，単語)
 			const randomItem = Math.floor(Math.random() * dataNums);
 			const {word,reading} = jsonData.data[randomItem].japanese[0];
-			// const slug = jsonData.data[randomItem].slug;
-	
+
 			// TODO: readingから，「・」，「=」の除去
-			return {word, reading};
+			return word && reading ? `${word}(${reading})` : word ? word : reading;
 		}
 		else{
 			return console.error(`Error: ${response.status}`);
@@ -40,8 +39,9 @@ async function getRandomAI() {
 		return console.error(error);
 	}
 }
-// テスト用コード(単語，読み)
-console.log(await getRandomAI())
+// テスト用コード
+const word = await getRandomAI();
+console.log(word);
 
 /**
  * 文字列が、指定されたひらがなから始まっているかを確かめる関数。
