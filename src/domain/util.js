@@ -5,6 +5,8 @@
  * @return 「あい」から始まる単語
  */
 
+// TODO: 出力から，「・」，「=」の除去
+// TODO: 文字数制限
 async function getRandomAI() {
 	// 取得するページ番号の最大値
 	const maxPage = 170;
@@ -12,7 +14,7 @@ async function getRandomAI() {
 	const keyWord = 'あい';
 	const randomPage = Math.floor(Math.random() * maxPage) + 1;
 
-	const apiURL = `https://jisho.org/api/v1/search/words?keyword=${keyWord}&page=${randomPage}`;
+	const apiURL = `https://jisho.org/api/v1/search/words?keyword=${keyWord}&page=${randomPage}#`;
 
 	try {
 		// APIによる情報取得
@@ -29,7 +31,6 @@ async function getRandomAI() {
 			const randomItem = Math.floor(Math.random() * dataNums);
 			const {word,reading} = jsonData.data[randomItem].japanese[0];
 
-			// TODO: readingから，「・」，「=」の除去
 			return word && reading ? `${word}(${reading})` : word ? word : reading;
 		}
 		else{
