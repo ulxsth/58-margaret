@@ -35,7 +35,7 @@ async function getRandomAI() {
 			const { word, reading } = jsonData.data[randomItem].japanese[0];
 
 			return word && reading ? `${word}(${reading})` : word ? word : reading;
-		} 
+		}
 	} catch (error) {
 		return console.error(error);
 	}
