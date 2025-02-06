@@ -11,31 +11,31 @@ async function getRandomAI() {
 	// 取得するページ番号の最大値
 	const maxPage = 170;
 	// URLのキーワード，ページ番号決定
-	const keyWord = 'あい';
+	const keyWord = "あい";
 	const randomPage = Math.floor(Math.random() * maxPage) + 1;
 
 	const apiURL = `https://jisho.org/api/v1/search/words?keyword=${keyWord}&page=${randomPage}#`;
 
 	try {
 		// APIによる情報取得
-		const response = await fetch(apiURL, {method: 'GET',headers: {
-			"Content-Type": "application/json"
-		}});
+		const response = await fetch(apiURL, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
 		// データをjson形式化
 		const jsonData = await response.json();
 
-		if (jsonData){
+		if (jsonData) {
 			// データ長さ
-			const dataNums = jsonData.data.length
+			const dataNums = jsonData.data.length;
 			// ページからランダムに単語取得(読み，単語)
 			const randomItem = Math.floor(Math.random() * dataNums);
-			const {word,reading} = jsonData.data[randomItem].japanese[0];
+			const { word, reading } = jsonData.data[randomItem].japanese[0];
 
 			return word && reading ? `${word}(${reading})` : word ? word : reading;
-		}
-		else{
-			return console.error(`Error: ${response.status}`);
-		}
+		} 
 	} catch (error) {
 		return console.error(error);
 	}
