@@ -2,8 +2,7 @@
 	"name": "58-margaret",
 	"type": "module",
 	"scripts": {
-		"dev": "wrangler dev",
-		"deploy": "wrangler deploy --minify",
+		"dev": "nodemon src/app.js",
 		"format:fix": "npx @biomejs/biome check --write"
 	},
 	"devDependencies": {
