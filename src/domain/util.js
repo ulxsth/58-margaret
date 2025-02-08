@@ -4,7 +4,7 @@
  *
  * @return 「あい」から始まる単語
  */
-function getRandomAI() {
+export function getRandomAI() {
 	return "愛";
 }
 
@@ -14,6 +14,6 @@ function getRandomAI() {
  * @param {string} excepted 頭にくることが期待されている文字（例：あ、い）
  * @return {boolean} 指定した文字で始まっているかどうか
  */
-function startsWithHiragana(text, excepted) {
+export function startsWithHiragana(text, excepted) {
 	return true;
 }

@@ -3,6 +3,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "nodemon src/app.js",
+		"test": "NODE_OPTIONS=--experimental-vm-modules jest --verbose",
 		"format:fix": "npx @biomejs/biome check --write"
 	},
 	"devDependencies": {
