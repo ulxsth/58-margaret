@@ -15,5 +15,5 @@ export function getRandomAI() {
  * @return {boolean} 指定した文字で始まっているかどうか
  */
 export function startsWithHiragana(text, excepted) {
-	return true;
+	return text.startsWith(excepted);
 }
