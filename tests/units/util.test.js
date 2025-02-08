@@ -8,4 +8,12 @@ describe("startsWithHiragana は文字列の読みをそのままにして平仮
     // then
     expect(result).toBe(true);
   });
+
+  test("'あいうえお'に対し'い'が渡されたとき、falseを返す", () => {
+    // given, when
+    const result = startsWithHiragana("あいうえお", "い");
+
+    // then
+    expect(result).toBe(false);
+  });
 });
