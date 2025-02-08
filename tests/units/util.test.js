@@ -43,5 +43,13 @@ describe("startsWithHiragana: 指定した平仮名から始まる文字列か�
       // then
       await expect(result).rejects.toThrow("引数が不正です");
     });
+
+    test("'あいうえお', '' => IllegalArgumentError", async () => {
+      // given, when
+      const result = startsWithHiragana("あいうえお", "");
+
+      // then
+      await expect(result).rejects.toThrow("引数が不正です");
+    });
   })
 });
