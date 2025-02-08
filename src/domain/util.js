@@ -16,6 +16,10 @@ export function getRandomAI() {
  * @return {boolean} 指定した文字で始まっているかどうか
  */
 export async function startsWithHiragana(text, excepted) {
+	if (!text || text === "" || !excepted || excepted === "") {
+		throw new Error("引数が不正です");
+	}
+
 	const yomi = await convertToYomi(text);
 	const hiragana = kanaToHira(yomi);
 	console.log(hiragana);
