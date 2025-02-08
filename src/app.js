@@ -2,9 +2,13 @@ import express from "express";
 
 const app = express();
 app.use(express.json());
+app.use(express.static("assets"));
+
+app.set("view engine", "ejs");
+app.set("views", "assets/views");
 
 app.get("/", (req, res) => {
-	res.send("Hello World!");
+	res.render("index");
 });
 
 app.listen(3000, () => {
