@@ -16,4 +16,12 @@ describe("startsWithHiragana は文字列の読みをそのままにして平仮
     // then
     expect(result).toBe(false);
   });
+
+  test("'色は匂へど散りぬるを'に対し'い'が渡されたとき、trueを返す", () => {
+    // given, when
+    const result = startsWithHiragana("色は匂へど散りぬるを", "い");
+
+    // then
+    expect(result).toBe(true);
+  });
 });
