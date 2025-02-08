@@ -1,10 +1,6 @@
 {
-  "transform": {
-    "^.+\\.[jt]sx?$": "babel-jest"
-  },
-  "extensionsToTreatAsEsm": [
-    ".jsx",
-    ".ts",
-    ".tsx"
-  ]
+	"transform": {
+		"^.+\\.[jt]sx?$": "babel-jest"
+	},
+	"extensionsToTreatAsEsm": [".jsx", ".ts", ".tsx"]
 }

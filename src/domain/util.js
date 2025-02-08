@@ -30,8 +30,6 @@ export async function startsWithHiragana(text, excepted) {
 	return hiragana.startsWith(excepted);
 }
 
-
-
 /**
  * 与えられた文字列を、カタカナのみの読みに変換する関数。
  * @param {string} text 変換対象の文字列
@@ -39,15 +37,17 @@ export async function startsWithHiragana(text, excepted) {
  */
 async function convertToYomi(text) {
 	return tokenize(text).then((tokens) => {
-		return tokens.map((token) => {
-			return token.reading || token.surface_form;
-		}).join("");
-	})
+		return tokens
+			.map((token) => {
+				return token.reading || token.surface_form;
+			})
+			.join("");
+	});
 }
 
 function kanaToHira(str) {
-	return str.replace(/[\u30a1-\u30f6]/g, function (match) {
-		var chr = match.charCodeAt(0) - 0x60;
+	return str.replace(/[\u30a1-\u30f6]/g, (match) => {
+		const chr = match.charCodeAt(0) - 0x60;
 		return String.fromCharCode(chr);
 	});
 }
