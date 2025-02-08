@@ -1,7 +1,7 @@
 import { startsWithHiragana } from "../../src/domain/util";
 
-describe("startsWithHiragana は文字列の読みをそのままにして平仮名のみに置換する", () => {
-  test("'あいうえお'に対し'あ'が渡されたとき、trueを返す", async () => {
+describe("startsWithHiragana: 指定した平仮名から始まる文字列かを検査する", () => {
+  test("'あいうえお', 'あ' => true", async () => {
     // given, when
     const result = await startsWithHiragana("あいうえお", "あ");
 
@@ -9,7 +9,7 @@ describe("startsWithHiragana は文字列の読みをそのままにして平仮
     expect(result).toBe(true);
   });
 
-  test("'あいうえお'に対し'い'が渡されたとき、falseを返す", async () => {
+  test("'あいうえお', 'い' => false", async () => {
     // given, when
     const result = await startsWithHiragana("あいうえお", "い");
 
@@ -17,11 +17,19 @@ describe("startsWithHiragana は文字列の読みをそのままにして平仮
     expect(result).toBe(false);
   });
 
-  test("'色は匂へど散りぬるを'に対し'い'が渡されたとき、trueを返す", async () => {
+  test("'色は匂へど散りぬるを', 'い' => true", async () => {
     // given, when
     const result = await startsWithHiragana("色は匂へど散りぬるを", "い");
 
     // then
     expect(result).toBe(true);
+  });
+
+  test("'色は匂へど散りぬるを', 'あ' => false", async () => {
+    // given, when
+    const result = await startsWithHiragana("色は匂へど散りぬるを", "あ");
+
+    // then
+    expect(result).toBe(false);
   });
 });
