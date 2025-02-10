@@ -13,6 +13,15 @@ app.get("/", (req, res) => {
 	res.render("index");
 });
 
+// あいうえお作文
+app.get("aiueo-sakubun/input", (req, res) => {
+	res.render("aiueo-sakubun/input");
+});
+
+app.get("aiueo-sakubun/result", (req, res) => {
+	res.render("aiueo-sakubun/input");
+});
+
 app.listen(3000, () => {
 	console.log("Server is running on port 3000");
 });
