@@ -14,12 +14,12 @@ app.get("/", (req, res) => {
 });
 
 // あいうえお作文
-app.get("aiueo-sakubun/input", (req, res) => {
+app.get("/aiueo-sakubun/input", (req, res) => {
 	res.render("aiueo-sakubun/input");
 });
 
-app.get("aiueo-sakubun/result", (req, res) => {
-	res.render("aiueo-sakubun/input");
+app.get("/aiueo-sakubun/result", (req, res) => {
+	res.render("aiueo-sakubun/result");
 });
 
 app.listen(3000, () => {
