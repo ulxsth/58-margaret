@@ -1,7 +1,7 @@
 import express from "express";
 import expressEjsLayouts from "express-ejs-layouts";
 
-const PORT = 8080
+const PORT = 8080;
 
 const app = express();
 app.use(express.json());
