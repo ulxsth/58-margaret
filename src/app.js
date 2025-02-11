@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(express.static("assets"));
 
 app.set("view engine", "ejs");
-app.set("views", "src/views");
+app.set("views", "views");
 app.use(expressEjsLayouts);
 
 app.get("/", (req, res) => {
