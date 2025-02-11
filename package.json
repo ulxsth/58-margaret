@@ -4,6 +4,7 @@
 	"scripts": {
 		"dev": "nodemon src/app.js",
 		"build": "babel src -d build",
+		"start": "node src/app.js",
 		"test": "NODE_OPTIONS=--experimental-vm-modules jest",
 		"format:fix": "npx @biomejs/biome check --write"
 	},
