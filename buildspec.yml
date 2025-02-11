@@ -14,5 +14,8 @@ phases:
 
 artifacts:
   files:
-    - '**/*'
-  base-directory: '/'
+    - 'build/**/*' 
+    - 'package.json' 
+    - 'package-lock.json'
+  base-directory: '.' 
+  discard-paths: no # ディレクトリ構造を維持
