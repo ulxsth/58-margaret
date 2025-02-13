@@ -1,0 +1,38 @@
+<h1>採点結果</h1>
+  <!-- 採点結果表示エリア -->
+  <div id="resultDisplay"></div>
+  <button onclick="restart()">もう一度挑戦する</button>
+
+  <script>
+    // localStorageからデータを取得
+    const data = localStorage.getItem("aiueoData");
+    if (data) {
+      const formData = JSON.parse(data);
+      const topic = formData.topic;
+      const inputs = formData.inputs;
+
+      const resultDiv = document.getElementById("resultDisplay");
+
+      // お題の表示
+      resultDiv.innerHTML = "<p>お題: " + topic + "</p>";
+
+      // 作成した文章の表示（例として、各文字と入力内容を表示）
+      resultDiv.innerHTML += "<h2>あなたの作文</h2>";
+      for (let i = 0; i < inputs.length; i++) {
+        resultDiv.innerHTML += "<p>" + topic[i] + "： " + inputs[i] + "</p>";
+      }
+
+      // 採点結果の表示（ここではランダムな点数を例示）
+      const score = Math.floor(Math.random() * 101);  // 0～100点のランダムな点数
+      resultDiv.innerHTML += "<h2>点数: " + score + "点</h2>";
+
+    } else {
+      document.getElementById("resultDisplay").innerHTML = "<p>データが見つかりません。もう一度お試しください。</p>";
+    }
+
+    // 「もう一度挑戦する」ボタン押下時の処理
+    function restart() {
+      localStorage.removeItem("aiueoData");
+      window.location.href = "index.html";
+    }
+  </script>
