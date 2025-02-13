@@ -1,12 +1,14 @@
 import express from "express";
 import expressEjsLayouts from "express-ejs-layouts";
 
+const PORT = 8080;
+
 const app = express();
 app.use(express.json());
 app.use(express.static("assets"));
 
 app.set("view engine", "ejs");
-app.set("views", "src/views");
+app.set("views", "views");
 app.use(expressEjsLayouts);
 
 app.get("/", (req, res) => {
