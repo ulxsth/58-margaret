@@ -37,7 +37,7 @@ Express + ejs
 npm run dev
 ```
 
-2. ブラウザを開いて http://localhost:8080 にアクセスします
+2. ブラウザを開いて http://localhost:3000 にアクセス
 3. Web ページが開いたら成功！
 4. `Ctrl + C` を同時押しするとサーバーが停止します
 
