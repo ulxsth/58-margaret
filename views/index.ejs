@@ -1,3 +1,65 @@
-Hello World
+<h1>あいうえお作文 ゲーム</h1>
+  <!-- お題表示エリア -->
+  <div id="topicDisplay"></div>
+
+  <!-- 入力フォーム -->
+  <form id="aiueoForm">
+    <div id="inputFields"></div>
+    <button type="button" onclick="submitForm()">送信</button>
+  </form>
+
+  <script>
+    // 事前に用意したお題のリスト
+    const topics = ["あいす", "ねこ", "うみ", "たまご", "さくら"];
+
+    // ランダムにお題を選ぶ
+    const topic = topics[Math.floor(Math.random() * topics.length)];
+
+    // 選んだお題を表示する
+    document.getElementById("topicDisplay").innerHTML = "<p>お題: " + topic + "</p>";
+
+    // お題の各文字に対応する入力欄を作成する
+    const inputFieldsDiv = document.getElementById("inputFields");
+    for (let i = 0; i < topic.length; i++) {
+      const char = topic[i];
+
+      // ラベル作成
+      const label = document.createElement("label");
+      label.textContent = char + "：";
+
+      // 入力欄作成
+      const input = document.createElement("input");
+      input.type = "text";
+      input.id = "input" + i;
+      input.name = "input" + i;
+
+      // 入力欄とラベルをフォームに追加
+      inputFieldsDiv.appendChild(label);
+      inputFieldsDiv.appendChild(input);
+      inputFieldsDiv.appendChild(document.createElement("br"));
+    }
+
+    // 送信ボタン押下時の処理
+    function submitForm() {
+      // 入力された内容を配列に格納
+      const inputs = [];
+      for (let i = 0; i < topic.length; i++) {
+        const inputVal = document.getElementById("input" + i).value;
+        inputs.push(inputVal);
+      }
+
+      // 保存するデータをオブジェクトにまとめる
+      const formData = {
+        topic: topic,
+        inputs: inputs
+      };
+
+      // localStorageにJSON文字列として保存
+      localStorage.setItem("aiueoData", JSON.stringify(formData));
+
+      // 結果ページに遷移
+      window.location.href = "result.html";
+    }
+  </script>
 
 <%- contentFor("css") %>
