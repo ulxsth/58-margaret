@@ -44,8 +44,8 @@ export async function getRandomAI() {
 	}
 }
 // テスト用コード
-// const word = await getRandomAI();
-// console.log(word);
+const word = await getRandomAI();
+console.log(word);
 
 /**
  * 文字列が、指定されたひらがなから始まっているかを確かめる関数。
