@@ -1,4 +1,17 @@
-import { startsWithHiragana } from "../../src/domain/util";
+import {getRandomAI, startsWithHiragana } from "../../src/domain/util";
+
+describe("getRandomAI: 「あい」で始まる単語をランダムに返すか検査する", ()=>{
+
+	// 処理の中の fetch 関数の返り値を固定の値にする
+	// 例：アインシュタイン
+	describe("正常系",()=>{
+		test("'あい'=>true", async()=>{
+		const result = await getRandomAI("あい");
+		// then
+		expect(!!result).toBe(true);
+		}
+	)}); 
+});
 
 describe("startsWithHiragana: 指定した平仮名から始まる文字列かを検査する", () => {
 	describe("正常系", () => {
@@ -73,3 +86,5 @@ describe("startsWithHiragana: 指定した平仮名から始まる文字列か�
 		});
 	});
 });
+
+
