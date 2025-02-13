@@ -1,3 +1,4 @@
+import { json } from "express";
 import { tokenize } from "kuromojin";
 /**
  * 「あい」から始まる単語をランダムに返す関数。
@@ -33,9 +34,10 @@ export async function getRandomAI() {
 			const dataNums = jsonData.data.length;
 			// ページからランダムに単語取得(読み，単語)
 			const randomItem = Math.floor(Math.random() * dataNums);
-			const { word, reading } = jsonData.data[randomItem].japanese[0];
+			return jsonData.data[randomItem];
+			// const { word, reading } = jsonData.data[randomItem].japanese[0];
 
-			return word && reading ? `${word}(${reading})` : word ? word : reading;
+			// return word && reading ? `${word}(${reading})` : word ? word : reading;
 		}
 	} catch (error) {
 		return console.error(error);
