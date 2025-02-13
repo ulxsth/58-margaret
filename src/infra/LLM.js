@@ -1,5 +1,5 @@
 // import fetch from "node-fetch";
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 dotenv.config();
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import Groq from "groq-sdk";
@@ -16,7 +16,7 @@ export async function askLLM(model, prompt, options = {}) {
 		case "gpt":
 			return await askGPT(prompt, options);
 		case "gemini":
-			return await askGemini(prompt,options);
+			return await askGemini(prompt, options);
 		case "groq":
 			return await askGroq(prompt, options);
 		default:
@@ -28,9 +28,9 @@ async function askGPT() {}
 
 // gemini
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-export async function askGemini(prompt){
+export async function askGemini(prompt) {
 	try {
-		const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+		const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 		const result = await model.generateContent(prompt);
 		const response = result.response;
 		const text = response.text();
@@ -42,13 +42,13 @@ export async function askGemini(prompt){
 
 // groq api
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
-export async function askGroq(prompt){
+export async function askGroq(prompt) {
 	try {
 		return groq.chat.completions.create({
 			messages: [
 				{
 					role: "user",
-					content: prompt
+					content: prompt,
 				},
 			],
 			model: "llama-3.3-70b-versatile",

@@ -8,6 +8,7 @@
     const data = localStorage.getItem("aiueoData");
     if (data) {
       const formData = JSON.parse(data);
+      console.log(formData);
       const topic = formData.topic;
       const inputs = formData.inputs;
 
