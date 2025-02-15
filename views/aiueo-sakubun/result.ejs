@@ -5,36 +5,83 @@
 <!-- 採点結果表示エリア -->
 <div id="resultDisplay"></div>
 <div id="resultIcon" class="result-icon"></div>
-<button onclick="restart()">もう一度挑戦する</button>
+<button onclick="onRestart()">もう一度挑戦する</button>
 
 <script>
   // localStorageからデータを取得
   const data = localStorage.getItem("aiueoData");
   if (!data) {
     document.getElementById("resultDisplay").innerHTML = "<p>データが見つかりません。もう一度お試しください。</p>";
-    return;
   }
 
   const formData = JSON.parse(data);
-  //console.log(formData);
   const topic = formData.topic;
+  const topicYomi = formData.topicYomi;
   const inputs = formData.inputs;
-  console.log(inputs);
-  const resultDiv = document.getElementById("resultDisplay");
 
-  const bodyData = {
-    topic: topic,
-    text: inputs
+  // お題の表示
+  const resultDiv = document.getElementById("resultDisplay");
+  resultDiv.innerHTML = "<p>お題: " + topic + "</p>";
+
+  // 作成した文章の表示（例として、各文字と入力内容を表示）
+  resultDiv.innerHTML += "<h2>あなたの作文</h2>";
+  for (let i = 0; i < topicYomi.length; i++) {
+    resultDiv.innerHTML += "<p>" + topicYomi[i] + "： " + inputs[i] + "</p>";
   }
-  console.log(bodyData);
-  async function fetchData() {
+  displayResult();
+
+  // 「もう一度挑戦する」ボタン押下時の処理
+  function onRestart() {
+    localStorage.removeItem("aiueoData");
+    window.location.href = "input"
+  }
+
+  async function displayResult() {
+    const fetchedData = await fetchScore(topic, inputs);
+    const score = await fetchedData.json();
+    if (score === null) {
+      console.log("Score is null, unable to display result.");
+      return;
+    }
+
+    const keys = Object.keys(score);
+    const values = Object.values(score);
+
+    // 結果表示エリアに結果を表示
+    const resultIconDiv = document.getElementById("resultIcon");
+    for (let i = 0; i < keys.length; i++) {
+      // 点数の平均値を計算
+      const averageValueFn = (value) => value.reduce((acc, current) => acc + current, 0) / value.length;
+      const averageValue = averageValueFn(JSON.parse(values[i]));
+
+      // 点数の表示
+      resultDiv.innerHTML += keys[i] + "の結果：";
+      resultDiv.innerHTML += Math.floor(averageValue) + "点　";
+
+      // 点数に応じたアイコンの表示
+      if (averageValue >= 70) {
+        resultIconDiv.innerHTML += "😊";
+      } else if (averageValue <= 40) {
+        resultIconDiv.innerHTML += "🤖";
+      } else {
+        resultIconDiv.innerHTML += "😐";
+      }
+    }
+  }
+
+  async function fetchScore(topic, inputs) {
+    const bodyData = {
+      topic: topic,
+      text: inputs
+    }
+
     try {
       const response = await fetch('/api/v1/score', {
-        method: 'POST', // POSTリクエスト
+        method: 'POST',
         headers: {
-          'Content-Type': 'application/json' // サーバーがJSONデータを受け取ることを示す
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(bodyData) // JavaScriptオブジェクトをJSON文字列に変換して送信
+        body: JSON.stringify(bodyData)
       });
       return response;
       if (!response) {
@@ -43,55 +90,6 @@
     } catch (e) {
       console.error("Failed to fetch data", e);
     }
-  }
-  // お題の表示
-  resultDiv.innerHTML = "<p>お題: " + topic + "</p>";
-
-  // 作成した文章の表示（例として、各文字と入力内容を表示）
-  resultDiv.innerHTML += "<h2>あなたの作文</h2>";
-  for (let i = 0; i < inputs.length; i++) {
-    resultDiv.innerHTML += "<p>" + topic[i] + "： " + inputs[i] + "</p>";
-  }
-
-  // 採点結果の表示（ここではランダムな点数を例示）
-
-  async function displayResult() {
-    const fetchedData = await fetchData(); // 非同期に点数を取得
-    const score = await fetchedData.json();
-    const keys = Object.keys(score);
-    const values = Object.values(score);
-    console.log(values);
-    if (score !== null) {
-      const resultIconDiv = document.getElementById("resultIcon");
-
-      for (let i = 0; i < keys.length; i++) {
-        resultDiv.innerHTML += keys[i] + "の結果：";
-        const averageValueFn = (value) => value.reduce((acc, current) => acc + current, 0) / value.length;
-        const averageValue = averageValueFn(JSON.parse(values[i]));
-        resultDiv.innerHTML += Math.floor(averageValue) + "点　";
-        console.log(averageValue);
-        // 点数に応じたアイコンの表示
-        if (averageValue >= 70) {
-          resultIconDiv.innerHTML += "😊";  // 人間のマーク
-        } else if (averageValue <= 40) {
-          resultIconDiv.innerHTML += "🤖";  // AIのマーク
-        } else {
-          resultIconDiv.innerHTML += "😐";  // 中間のマーク
-        }
-      }
-    } else {
-      console.log("Score is null, unable to display icon.");
-    }
-  }
-
-  // ページロード時に結果を表示
-  displayResult();
-
-  // 「もう一度挑戦する」ボタン押下時の処理
-  function restart() {
-    localStorage.removeItem("aiueoData");
-    window.location.href = "input"
-
   }
 </script>
 
