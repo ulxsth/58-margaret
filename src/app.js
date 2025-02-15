@@ -6,7 +6,7 @@ const PORT = 8080;
 
 const app = express();
 app.use(express.json());
-app.use(express.static("assets"));
+app.use("/assets", express.static("assets"));
 
 app.set("view engine", "ejs");
 app.set("views", "views");
