@@ -9,7 +9,10 @@ import askLLM from "../infra/LLM.js";
 const useLLM = ["gemini", "groq"];
 const result = {};
 
-export async function score(text) {
+export async function score(formData) {
+	const topic = formData["topic"];
+	const text = formData["text"].map((val)=>val).join("\n");
+
 	const prompt = `以下の文章を 3 つの基準で 100 点満点で採点してください。
 	### 評価基準:
 	1. **関連性**: お題に沿っているか（100 = 完全に沿っている, 1 = ほぼ無関係）
@@ -17,7 +20,7 @@ export async function score(text) {
 	3. **表現力**: 言葉のセンスがあるか（100 = 魅力的な言葉遣い, 1 = 単調）
 	
 	### お題:
-	あいうえを作文で，愛してる
+	あいうえを作文で，${topic}
 	
 	### 文章:
 	${text}
@@ -37,11 +40,11 @@ export async function score(text) {
 	return result;
 }
 
-const text = `あなたを
-いつも
-しょっちゅう
-ていきてきに
-るーぷして考える`;
+const formData = {
+	topic: "あいしてる",
+	text: ["あなたを", "いつも", "しょっちゅう", "ていきてきに", "るーぷする"],
+}
 
-const output = await score(text);
+const output = await score(formData);
 console.log(output.gemini);
+console.log(output.groq);
