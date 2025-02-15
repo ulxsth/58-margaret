@@ -1,6 +1,6 @@
 import express from "express";
 import expressEjsLayouts from "express-ejs-layouts";
-import { getRandomAI } from "./domain/util.js";
+import { getRandomAI, convertToYomi } from "./domain/util.js";
 
 const PORT = 8080;
 
