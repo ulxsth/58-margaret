@@ -39,3 +39,9 @@ button {
 button:hover {
     background-color: #ff1493;
 }
+
+.result-icon {
+    font-size: 50px;
+    text-align: center;
+    margin-top: 20px;
+}
