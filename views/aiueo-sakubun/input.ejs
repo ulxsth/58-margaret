@@ -56,6 +56,7 @@
         }
 
         // 各行が指定された文字から始まっているかをチェック
+        // TODO: baseUrl に差し替え
         const response = await fetch('http://localhost:8080/api/v1/starts-with', {
           method: 'POST',
           headers: {
