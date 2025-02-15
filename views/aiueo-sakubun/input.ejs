@@ -45,7 +45,7 @@
     }
 
     // 送信ボタン押下時の処理
-    function submitForm() {
+    async function submitForm() {
       // 入力された内容を配列に格納
       const inputs = [];
       for (let i = 0; i < topic.length; i++) {
@@ -54,6 +54,24 @@
           alert("すべての入力を記入してください");
           return; // 入力が空または空白の場合、処理を中断する
         }
+
+        // 各行が指定された文字から始まっているかをチェック
+        const response = await fetch('http://localhost:8080/api/v1/starts-with', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ text: inputVal, prefix: topic.charAt(i) })
+        });
+        const result = await response.json();
+        console.log(result);
+        
+
+        if (!result) {
+          alert(`入力が「${topic.charAt(i)}」から始まっていません: ${inputVal}`);
+          return; // 入力が指定された文字から始まっていない場合、処理を中断する
+        }
+
         inputs.push(inputVal);
       }
 
