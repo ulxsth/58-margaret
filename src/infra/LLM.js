@@ -17,9 +17,10 @@ export async function askLLM(model, prompt, options = {}) {
 			return await askGPT(prompt, options);
 		case "gemini":
 			return await askGemini(prompt, options);
-		case "groq":
+		case "groq": {
 			const res = await askGroq(prompt, options);
-			return res.choices[0].message.content
+			return res.choices[0].message.content;
+		}
 		default:
 			throw new Error(`Unsupported model: ${model}`);
 	}
