@@ -23,7 +23,10 @@ app.get("/", (req, res) => {
 
 app.get("/aiueo-sakubun/input", async (req, res) => {
 	const data = await getRandomAI();
-	res.render("aiueo-sakubun/input", { data: data });
+	const word = data.japanese[0].word ?? data.japanese[0].reading;
+	const yomi = await convertToYomi(word);
+
+	res.render("aiueo-sakubun/input", { word, yomi });
 });
 
 app.get("/aiueo-sakubun/result", (req, res) => {
