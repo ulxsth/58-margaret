@@ -13,6 +13,10 @@ app.set("views", "views");
 app.use(expressEjsLayouts);
 
 // pages
+app.get("/", (req, res) => {
+	res.render("index");
+});
+
 app.get("/aiueo-sakubun/input", (req, res) => {
 	res.render("aiueo-sakubun/input");
 });
