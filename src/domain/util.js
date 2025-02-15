@@ -54,14 +54,8 @@ export async function startsWithHiragana(text, excepted) {
 		throw new Error("引数が不正です");
 	}
 
-	if (excepted.length !== 1 || !isHiragana(excepted)) {
-		throw new Error("excepted は1文字の平仮名である必要があります");
-	}
-
 	const yomi = await convertToYomi(text);
-	const hiragana = kanaToHira(yomi);
-	console.log(hiragana);
-	return hiragana.startsWith(excepted);
+	return yomi.startsWith(excepted);
 }
 
 /**
