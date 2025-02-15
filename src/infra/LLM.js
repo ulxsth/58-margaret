@@ -8,7 +8,7 @@ import fetch from "node-fetch";
  * @returns {Promise<string>} - LLMの応答
  * @throws {Error} - APIエラー発生時
  */
-export async function askLLM(model, prompt, options = {}) {
+export default async function askLLM(model, prompt, options = {}) {
 	switch (model) {
 		case "gpt":
 			return await askGPT(prompt, options);

@@ -39,11 +39,11 @@ export async function score(text) {
 	return result;
 }
 
-// const text = `あなたを
-// いつも
-// しょっちゅう
-// ていきてきに
-// るーぷして考える`;
+const text = `あなたを
+いつも
+しょっちゅう
+ていきてきに
+るーぷして考える`;
 
-// const output = await score(text);
-// console.log(JSON.stringify(output));
+const output = await score(text);
+console.log(JSON.stringify(output));
