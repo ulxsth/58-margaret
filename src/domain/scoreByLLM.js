@@ -10,8 +10,8 @@ const useLLM = ["gemini", "groq"];
 const result = {};
 
 export async function score(formData) {
-	const topic = formData["topic"];
-	const text = formData["text"].map((val)=>val).join("\n");
+	const topic = formData.topic;
+	const text = formData.text.map((val) => val).join("\n");
 
 	const prompt = `以下の文章を 3 つの基準で 100 点満点で採点してください。
 	### 評価基準:
@@ -40,11 +40,11 @@ export async function score(formData) {
 	return result;
 }
 
-const formData = {
-	topic: "あいしてる",
-	text: ["あなたを", "いつも", "しょっちゅう", "ていきてきに", "るーぷする"],
-}
+// const formData = {
+// 	topic: "あいしてる",
+// 	text: ["あなたを", "いつも", "しょっちゅう", "ていきてきに", "るーぷする"],
+// }
 
-const output = await score(formData);
-console.log(output.gemini);
-console.log(output.groq);
+// const output = await score(formData);
+// console.log(output.gemini);
+// console.log(output.groq);
