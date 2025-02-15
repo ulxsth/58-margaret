@@ -18,7 +18,8 @@ export async function askLLM(model, prompt, options = {}) {
 		case "gemini":
 			return await askGemini(prompt, options);
 		case "groq":
-			return await askGroq(prompt, options);
+			const res = await askGroq(prompt, options);
+			return res.choices[0].message.content
 		default:
 			throw new Error(`Unsupported model: ${model}`);
 	}
