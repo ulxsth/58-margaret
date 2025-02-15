@@ -15,11 +15,11 @@
 
   <script>
     // 事前に用意したお題のリスト
-    const topics = ["あいす", "ねこ", "うみ", "たまご", "さくら"];
+    //const topics = ["あいす", "ねこ", "うみ", "たまご", "さくら"];
 
     // ランダムにお題を選ぶ
-    const topic = topics[Math.floor(Math.random() * topics.length)];
-
+    //const topic = topics[Math.floor(Math.random() * topics.length)];
+    const topic = "<%= (data.japanese[0].word && data.japanese[0].word.trim() !== '') ? data.japanese[0].word : data.japanese[0].reading %>"
     // 選んだお題を表示する
     document.getElementById("topicDisplay").innerHTML = "<p>お題: " + topic + "</p>";
 
@@ -50,6 +50,10 @@
       const inputs = [];
       for (let i = 0; i < topic.length; i++) {
         const inputVal = document.getElementById("input" + i).value;
+        if (!inputVal || !inputVal.trim()) {
+          alert("すべての入力を記入してください");
+          return; // 入力が空または空白の場合、処理を中断する
+        }
         inputs.push(inputVal);
       }
 
@@ -64,7 +68,6 @@
 
       // 結果ページに遷移
       window.location.href = "result";
-    
     }
   </script>
 
