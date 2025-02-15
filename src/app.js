@@ -1,7 +1,7 @@
 import express from "express";
 import expressEjsLayouts from "express-ejs-layouts";
 import { score } from "./domain/scoreByLLM.js";
-import { convertToYomi, getRandomAI } from "./domain/util.js";
+import { convertToYomi, getRandomAI, startsWithHiragana } from "./domain/util.js";
 const PORT = 8080;
 
 const app = express();
@@ -59,12 +59,12 @@ app.post("/api/v1/score", async (req, res) => {
  * "prefix": string
  * }
  */
-app.post("/api/v1/starts-with", (req, res) => {
+app.post("/api/v1/starts-with", async (req, res) => {
 	const { text, prefix } = req.body;
 	if (typeof text !== "string" || typeof prefix !== "string") {
 		return res.status(400).json({ error: "Invalid input" });
 	}
-	const result = text.startsWith(prefix);
+	const result = await startsWithHiragana(text, prefix);
 	res.json(result);
 });
 
