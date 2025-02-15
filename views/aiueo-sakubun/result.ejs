@@ -9,6 +9,7 @@
 
   <script>
     // localStorageからデータを取得
+    console.log(window.location.href);
     const data = localStorage.getItem("aiueoData");
     if (data) {
       const formData = JSON.parse(data);

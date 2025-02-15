@@ -27,8 +27,8 @@ app.get("/api/v1/word", async (req, res) => {
 	res.json(data);
 });
 
-app.post("/api/v1/score", async (req, res) => {
-	const scores = await getRandomAI(req.body);
+app.get("/api/v1/score", async (req, res) => {
+	const scores = await getRandomAI(req.query.data);
 	res.json(scores);
 });
 
