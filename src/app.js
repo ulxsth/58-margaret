@@ -31,6 +31,10 @@ app.get("/api/v1/word", async (req, res) => {
 	res.json(data);
 });
 
+app.post("/api/v1/score", async (req, res) => {
+	
+})
+
 app.listen(PORT, () => {
 	console.log(`Server is running on port ${PORT}`);
 });
