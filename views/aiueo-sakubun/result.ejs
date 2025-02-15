@@ -4,9 +4,11 @@
 <body class="result-background">
 <h1>採点結果</h1>
   <!-- 採点結果表示エリア -->
-  <div id="resultDisplay"></div>
-  <div id="resultIcon" class="result-icon"></div>
-  <div id="resultImage" class="result-image"></div>
+  <div id="resultCard" class="result-card">
+    <div id="resultDisplay"></div>
+    <div id="resultIcon" class="result-icon"></div>
+    <div id="resultImage" class="result-image"></div>
+  </div>
   <button onclick="restart()">もう一度挑戦する</button>
 
   <script>
@@ -39,9 +41,11 @@
       if (score >= 70) {
         resultIconDiv.innerHTML = "😊";  // 人間のマーク
         resultImageDiv.innerHTML = '<img src="/assets/images/human.png" alt="高得点イメージ">';
+        resultImageDiv.innerHTML += '<img src="/assets/images/congratulations.png" alt="おめでとうイラスト">';
       } else if (score <= 40) {
         resultIconDiv.innerHTML = "🤖";  // AIのマーク
         resultImageDiv.innerHTML = '<img src="/assets/images/ai.png" alt="低得点イメージ">';
+        resultImageDiv.innerHTML += '<img src="/assets/images/sorry.png" alt="残念イラスト">';
       } else {
         resultIconDiv.innerHTML = "😐";  // 中間のマーク
       }
