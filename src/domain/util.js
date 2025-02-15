@@ -90,4 +90,3 @@ function isHiragana(str) {
 	const regex = /^[\p{scx=Hiragana}]+$/u;
 	return regex.test(str);
 }
-
