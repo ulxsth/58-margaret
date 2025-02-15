@@ -1,7 +1,7 @@
 import express from "express";
 import expressEjsLayouts from "express-ejs-layouts";
+import { score } from "./domain/scoreByLLM.js";
 import { convertToYomi, getRandomAI } from "./domain/util.js";
-
 const PORT = 8080;
 
 const app = express();
@@ -27,9 +27,10 @@ app.get("/api/v1/word", async (req, res) => {
 	res.json(data);
 });
 
-app.get("/api/v1/score", async (req, res) => {
-	const scores = await getRandomAI(req.body);
-	res.json(scores);
+app.post("/api/v1/score", async (req, res) => {
+	const scores = await score(req.body);
+	// console.log(scores);
+	res.send(scores);
 });
 
 app.post("/api/v1/starts-with", (req, res) => {

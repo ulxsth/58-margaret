@@ -9,16 +9,37 @@
 
   <script>
     // localStorageからデータを取得
-    console.log(window.location.href);
     const data = localStorage.getItem("aiueoData");
     if (data) {
       const formData = JSON.parse(data);
-      console.log(formData);
+      //console.log(formData);
       const topic = formData.topic;
       const inputs = formData.inputs;
       console.log(inputs);
       const resultDiv = document.getElementById("resultDisplay");
 
+      const bodyData = {
+        topic: topic,
+        text: inputs
+      }
+      console.log(bodyData);
+      async function fetchData(){
+        try{
+          const response = await fetch('/api/v1/score', {
+            method: 'POST', // POSTリクエスト
+            headers: {
+              'Content-Type': 'application/json' // サーバーがJSONデータを受け取ることを示す
+            },
+            body: JSON.stringify(bodyData) // JavaScriptオブジェクトをJSON文字列に変換して送信
+          });
+          return response;
+          if (!response){
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+        }catch(e){
+          console.error("Failed to fetch data", e);
+        }
+      }
       // お題の表示
       resultDiv.innerHTML = "<p>お題: " + topic + "</p>";
 
@@ -29,19 +50,37 @@
       }
 
       // 採点結果の表示（ここではランダムな点数を例示）
-      const score = Math.floor(Math.random() * 101);  // 0～100点のランダムな点数
-      resultDiv.innerHTML += "<h2>点数: " + score + "点</h2>";
 
-      // 点数に応じたアイコンの表示
-      const resultIconDiv = document.getElementById("resultIcon");
-      if (score >= 70) {
-        resultIconDiv.innerHTML = "😊";  // 人間のマーク
-      } else if (score <= 40) {
-        resultIconDiv.innerHTML = "🤖";  // AIのマーク
-      } else {
-        resultIconDiv.innerHTML = "😐";  // 中間のマーク
+      async function displayResult() {
+        const fetchedData = await fetchData(); // 非同期に点数を取得
+        const score = await fetchedData.json();
+        const keys = Object.keys(score);
+        const values = Object.values(score);
+        console.log(values);
+        if (score !== null) {
+          const resultIconDiv = document.getElementById("resultIcon");
+
+          for (let i = 0; i < keys.length; i++){
+            resultDiv.innerHTML += keys[i] + "の結果";
+            const averageValueFn = (value) => value.reduce((acc, current) => acc + current, 0) / value.length;
+            const averageValue = averageValueFn(JSON.parse(values[i]));
+            console.log(averageValue);
+            // 点数に応じたアイコンの表示
+            if (averageValue >= 70) {
+              resultIconDiv.innerHTML += "😊";  // 人間のマーク
+            } else if (averageValue <= 40) {
+              resultIconDiv.innerHTML += "🤖";  // AIのマーク
+            } else {
+              resultIconDiv.innerHTML += "😐";  // 中間のマーク
+            }
+          }
+        } else {
+          console.log("Score is null, unable to display icon.");
+        }
       }
-
+  
+      // ページロード時に結果を表示
+      displayResult();
     } else {
       document.getElementById("resultDisplay").innerHTML = "<p>データが見つかりません。もう一度お試しください。</p>";
     }
