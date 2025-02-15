@@ -54,14 +54,9 @@ export async function startsWithHiragana(text, excepted) {
 		throw new Error("引数が不正です");
 	}
 
-	if (excepted.length !== 1 || !isHiragana(excepted)) {
-		throw new Error("excepted は1文字の平仮名である必要があります");
-	}
-
 	const yomi = await convertToYomi(text);
-	const hiragana = kanaToHira(yomi);
-	console.log(hiragana);
-	return hiragana.startsWith(excepted);
+	const exceptedKana = hiraToKana(excepted);
+	return yomi.startsWith(exceptedKana);
 }
 
 /**
@@ -82,6 +77,13 @@ export async function convertToYomi(text) {
 function kanaToHira(str) {
 	return str.replace(/[\u30a1-\u30f6]/g, (match) => {
 		const chr = match.charCodeAt(0) - 0x60;
+		return String.fromCharCode(chr);
+	});
+}
+
+function hiraToKana(str) {
+	return str.replace(/[\u3041-\u3096]/g, (match) => {
+		const chr = match.charCodeAt(0) + 0x60;
 		return String.fromCharCode(chr);
 	});
 }
