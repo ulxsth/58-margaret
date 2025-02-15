@@ -27,6 +27,11 @@ app.get("/api/v1/word", async (req, res) => {
 	res.json(data);
 });
 
+app.post("/api/v1/score", async (req, res) => {
+	const scores = await getRandomAI(req.body);
+	res.json(scores);
+});
+
 app.post("/api/v1/starts-with", (req, res) => {
 	const { text, prefix } = req.body;
 	if (typeof text !== "string" || typeof prefix !== "string") {
