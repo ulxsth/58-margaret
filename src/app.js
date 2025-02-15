@@ -33,7 +33,7 @@ app.post("/api/v1/starts-with", (req, res) => {
 		return res.status(400).json({ error: "Invalid input" });
 	}
 	const result = text.startsWith(prefix);
-	res.json({ result });
+	res.json(result);
 });
 
 app.listen(PORT, () => {
