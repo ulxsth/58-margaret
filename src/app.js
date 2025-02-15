@@ -36,6 +36,15 @@ app.post("/api/v1/starts-with", (req, res) => {
 	res.json(result);
 });
 
+app.post("/api/v1/to-yomi", (req, res) => {
+	const { text } = req.body;
+	if (typeof text !== "string") {
+		return res.status(400).json({ error: "Invalid input" });
+	}
+	const result = convertToYomi(text);
+	res.json(result);
+});
+
 app.listen(PORT, () => {
 	console.log(`Server is running on port ${PORT}`);
 });

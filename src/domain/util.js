@@ -1,4 +1,3 @@
-import { json } from "express";
 import { tokenize } from "kuromojin";
 /**
  * 「あい」から始まる単語をランダムに返す関数。
@@ -70,7 +69,7 @@ export async function startsWithHiragana(text, excepted) {
  * @param {string} text 変換対象の文字列
  * @returns 読み（カタカナ）に変換された文字列
  */
-async function convertToYomi(text) {
+export async function convertToYomi(text) {
 	return tokenize(text).then((tokens) => {
 		return tokens
 			.map((token) => {
@@ -91,3 +90,4 @@ function isHiragana(str) {
 	const regex = /^[\p{scx=Hiragana}]+$/u;
 	return regex.test(str);
 }
+
