@@ -32,22 +32,32 @@
       input.type = "text";
       input.id = "input" + i;
       input.name = "input" + i;
-
+      input.required = true; 
+      
       // 入力欄とラベルをフォームに追加
       inputFieldsDiv.appendChild(label);
       inputFieldsDiv.appendChild(input);
       inputFieldsDiv.appendChild(document.createElement("br"));
     }
-
+    
     // 送信ボタン押下時の処理
     function submitForm() {
       // 入力された内容を配列に格納
       const inputs = [];
-      for (let i = 0; i < topic.length; i++) {
+      for (let i = 0; i < topic.length; i++) {                                                
         const inputVal = document.getElementById("input" + i).value;
+        <!-- labelとinputValが違う時 -->
+
+        if (!inputVal){
+          alert("すべての入力を記入してください");
+          return; // 入力が足りなければ送信を中止する
+        }
+        if (topic[i] !==inputVal[0] ){
+          alert("文頭が違います");
+          return;
+        }
         inputs.push(inputVal);
       }
-
       // 保存するデータをオブジェクトにまとめる
       const formData = {
         topic: topic,
