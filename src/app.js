@@ -29,11 +29,11 @@ app.get("/aiueo-sakubun/result", (req, res) => {
 app.get("/api/v1/word", async (req, res) => {
 	const data = await getRandomAI();
 	res.json(data);
-})
+});
 
 app.listen(PORT, () => {
 	console.log(`Server is running on port ${PORT}`);
-}
+});
 
 app.listen(3000, () => {
 	console.log("Server is running on port 3000");
