@@ -36,12 +36,12 @@ app.post("/api/v1/starts-with", (req, res) => {
 	res.json(result);
 });
 
-app.post("/api/v1/to-yomi", (req, res) => {
+app.post("/api/v1/to-yomi", async (req, res) => {
 	const { text } = req.body;
 	if (typeof text !== "string") {
 		return res.status(400).json({ error: "Invalid input" });
 	}
-	const result = convertToYomi(text);
+	const result = await convertToYomi(text);
 	res.json(result);
 });
 
