@@ -39,8 +39,8 @@
       const resultIconDiv = document.getElementById("resultIcon");
       const resultImageDiv = document.getElementById("resultImage");
       if (score >= 70) {
-        resultIconDiv.innerHTML = "😊";  // 人間のマーク
-        resultImageDiv.innerHTML = '<img src="/assets/images/human.png" alt="高得点イメージ">';
+        resultIconDiv.innerHTML += "😊";  // 人間のマーク 
+        resultImageDiv.innerHTML += '<img src="/assets/images/happy.png" alt="高得点イメージ">';
         resultImageDiv.innerHTML += '<img src="/assets/images/congratulations.png" alt="おめでとうイラスト">';
       } else if (score <= 40) {
         resultIconDiv.innerHTML = "🤖";  // AIのマーク
