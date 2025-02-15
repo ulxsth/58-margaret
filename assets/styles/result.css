@@ -1,0 +1,56 @@
+/* 結果発表画面専用のCSS */
+
+body {
+    background-color: #fff0f5;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+h1 {
+    color: #ff69b4;
+    text-align: center;
+    font-weight: bold;
+}
+
+.result-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid #ff69b4;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+.result-item {
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+button {
+    background-color: #ff69b4;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ff1493;
+}
+
+.result-icon {
+    font-size: 50px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#resultDisplay {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 20px;
+}

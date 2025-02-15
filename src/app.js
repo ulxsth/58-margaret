@@ -12,11 +12,7 @@ app.set("view engine", "ejs");
 app.set("views", "views");
 app.use(expressEjsLayouts);
 
-// page
-app.get("/", (req, res) => {
-	res.render("index");
-});
-
+// pages
 app.get("/aiueo-sakubun/input", (req, res) => {
 	res.render("aiueo-sakubun/input");
 });

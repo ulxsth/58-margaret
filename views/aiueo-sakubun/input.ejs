@@ -1,3 +1,6 @@
+<head>
+  <link rel="stylesheet" href="/assets/styles/global.css">
+</head>
 <h1>あいうえお作文 ゲーム</h1>
   <!-- お題表示エリア -->
   <div id="topicDisplay"></div>
@@ -7,6 +10,8 @@
     <div id="inputFields"></div>
     <button type="button" onclick="submitForm()">送信</button>
   </form>
+
+  <div class="security-icon">🔒</div>
 
   <script>
     // 事前に用意したお題のリスト
@@ -64,3 +69,4 @@
   </script>
 
 <%- contentFor("css") %>
+<link rel="stylesheet" href="/styles/input.css">
