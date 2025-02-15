@@ -1,10 +1,12 @@
 <head>
   <link rel="stylesheet" href="/assets/styles/result.css">
 </head>
+<body class="result-background">
 <h1>採点結果</h1>
   <!-- 採点結果表示エリア -->
   <div id="resultDisplay"></div>
   <div id="resultIcon" class="result-icon"></div>
+  <div id="resultImage" class="result-image"></div>
   <button onclick="restart()">もう一度挑戦する</button>
 
   <script>
@@ -31,12 +33,15 @@
       const score = Math.floor(Math.random() * 101);  // 0～100点のランダムな点数
       resultDiv.innerHTML += "<h2>点数: " + score + "点</h2>";
 
-      // 点数に応じたアイコンの表示
+      // 点数に応じたアイコンと背景イラストの表示
       const resultIconDiv = document.getElementById("resultIcon");
+      const resultImageDiv = document.getElementById("resultImage");
       if (score >= 70) {
         resultIconDiv.innerHTML = "😊";  // 人間のマーク
+        resultImageDiv.innerHTML = '<img src="/assets/images/human.png" alt="高得点イメージ">';
       } else if (score <= 40) {
         resultIconDiv.innerHTML = "🤖";  // AIのマーク
+        resultImageDiv.innerHTML = '<img src="/assets/images/ai.png" alt="低得点イメージ">';
       } else {
         resultIconDiv.innerHTML = "😐";  // 中間のマーク
       }
@@ -55,3 +60,4 @@
   
 <%- contentFor("css") %>
 <link rel="stylesheet" href="/styles/result.css">
+</body>

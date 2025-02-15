@@ -54,3 +54,12 @@ button:hover {
     text-align: center;
     margin-top: 20px;
 }
+
+.result-background {
+  background: linear-gradient(to right, #ffcccb, #b0e0e6); /* 愛と藍の複合デザイン */
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
