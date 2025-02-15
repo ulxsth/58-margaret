@@ -17,6 +17,14 @@ app.get("/", (req, res) => {
 	res.render("index");
 });
 
+app.get("/aiueo-sakubun/input", (req, res) => {
+	res.render("aiueo-sakubun/input");
+});
+
+app.get("/aiueo-sakubun/result", (req, res) => {
+	res.render("aiueo-sakubun/result");
+});
+
 // apis
 app.get("/api/v1/word", async (req, res) => {
 	const data = await getRandomAI();
@@ -25,4 +33,8 @@ app.get("/api/v1/word", async (req, res) => {
 
 app.listen(PORT, () => {
 	console.log(`Server is running on port ${PORT}`);
+}
+
+app.listen(3000, () => {
+	console.log("Server is running on port 3000");
 });
