@@ -1,6 +1,6 @@
 import express from "express";
 import expressEjsLayouts from "express-ejs-layouts";
-import { getRandomAI } from "./domain/util.js";
+import { convertToYomi, getRandomAI } from "./domain/util.js";
 
 const PORT = 8080;
 
@@ -38,6 +38,15 @@ app.post("/api/v1/starts-with", (req, res) => {
 		return res.status(400).json({ error: "Invalid input" });
 	}
 	const result = text.startsWith(prefix);
+	res.json(result);
+});
+
+app.post("/api/v1/to-yomi", async (req, res) => {
+	const { text } = req.body;
+	if (typeof text !== "string") {
+		return res.status(400).json({ error: "Invalid input" });
+	}
+	const result = await convertToYomi(text);
 	res.json(result);
 });
 
