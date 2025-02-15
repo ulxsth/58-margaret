@@ -1,5 +1,58 @@
 /* 全体に反映するCSS */
 
 body {
-    background-color: gray;
+    background-color: #f0f0f0;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+/* 見出しのスタイル */
+h1 {
+    color: #2e8b57;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* 入力フォームのスタイル */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid #2e8b57;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+label {
+    margin: 5px 0;
+    font-weight: bold;
+}
+
+input {
+    margin: 5px 0;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #2e8b57;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #3cb371;
+}
+
+/* セキュリティアイコンのスタイル */
+.security-icon {
+    font-size: 50px;
+    color: #2e8b57;
+    text-align: center;
+    margin-bottom: 20px;
 }
