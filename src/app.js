@@ -16,9 +16,14 @@ app.set("view engine", "ejs");
 app.set("views", "views");
 app.use(expressEjsLayouts);
 
-// pages
-app.get("/aiueo-sakubun/input", (req, res) => {
-	res.render("aiueo-sakubun/input");
+// page
+app.get("/", (req, res) => {
+	res.render("index");
+});
+
+app.get("/aiueo-sakubun/input", async (req, res) => {
+	const data = await getRandomAI();
+	res.render("aiueo-sakubun/input", { data: data });
 });
 
 app.get("/aiueo-sakubun/result", (req, res) => {

@@ -15,11 +15,11 @@
 
   <script>
     // 事前に用意したお題のリスト
-    const topics = ["あいす", "ねこ", "うみ", "たまご", "さくら"];
+    //const topics = ["あいす", "ねこ", "うみ", "たまご", "さくら"];
 
     // ランダムにお題を選ぶ
-    const topic = topics[Math.floor(Math.random() * topics.length)];
-
+    //const topic = topics[Math.floor(Math.random() * topics.length)];
+    const topic = "<%= (data.japanese[0].word && data.japanese[0].word.trim() !== '') ? data.japanese[0].word : data.japanese[0].reading %>"
     // 選んだお題を表示する
     document.getElementById("topicDisplay").innerHTML = "<p>お題: " + topic + "</p>";
 
@@ -45,11 +45,34 @@
     }
 
     // 送信ボタン押下時の処理
-    function submitForm() {
+    async function submitForm() {
       // 入力された内容を配列に格納
       const inputs = [];
       for (let i = 0; i < topic.length; i++) {
         const inputVal = document.getElementById("input" + i).value;
+        if (!inputVal || !inputVal.trim()) {
+          alert("すべての入力を記入してください");
+          return; // 入力が空または空白の場合、処理を中断する
+        }
+
+        // 各行が指定された文字から始まっているかをチェック
+        // TODO: baseUrl に差し替え
+        const response = await fetch('http://localhost:8080/api/v1/starts-with', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ text: inputVal, prefix: topic.charAt(i) })
+        });
+        const result = await response.json();
+        console.log(result);
+        
+
+        if (!result) {
+          alert(`入力が「${topic.charAt(i)}」から始まっていません: ${inputVal}`);
+          return; // 入力が指定された文字から始まっていない場合、処理を中断する
+        }
+
         inputs.push(inputVal);
       }
 
@@ -63,7 +86,7 @@
       localStorage.setItem("aiueoData", JSON.stringify(formData));
 
       // 結果ページに遷移
-      window.location.href = `http://localhost:8080/aiueo-sakubun/result`;
+      window.location.href = `/aiueo-sakubun/result`;
     }
   </script>
 
