@@ -11,10 +11,6 @@ app.set("view engine", "ejs");
 app.set("views", "views");
 app.use(expressEjsLayouts);
 
-app.get("/", (req, res) => {
-	res.render("index");
-});
-
 // あいうえお作文
 app.get("/aiueo-sakubun/input", (req, res) => {
 	res.render("aiueo-sakubun/input");
