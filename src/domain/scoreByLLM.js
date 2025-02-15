@@ -23,18 +23,16 @@ export async function score(text) {
 	${text}
 	
 	### 出力フォーマット:
-	JSON 形式で出力だけしてください。
+	以下のように関連性，面白さ，表現よくについて配列の形式で出力だけしてください。
 	例
-	{'関連性' : 100,'面白さ' : 100,'表現力' : 100}
+ [100, 90, 95]
+
 	`;
 
 	for (let i = 0; i < useLLM.length; i++) {
 		const res = await askLLM(useLLM[i], prompt);
-		if (!(useLLM[i] === "groq")) {
-			result[useLLM[i]] = res;
-		} else {
-			result[useLLM[i]] = res.choices[0]?.message?.content || "";
-		}
+		result[useLLM[i]] = res;
+		// console.log(JSON.parse(res));
 	}
 	return result;
 }
@@ -46,4 +44,4 @@ const text = `あなたを
 るーぷして考える`;
 
 const output = await score(text);
-console.log(JSON.stringify(output));
+console.log(output.gemini);
