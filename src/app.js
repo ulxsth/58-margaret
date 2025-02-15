@@ -27,6 +27,15 @@ app.get("/api/v1/word", async (req, res) => {
 	res.json(data);
 });
 
+app.post("/api/v1/starts-with", (req, res) => {
+	const { text, prefix } = req.body;
+	if (typeof text !== "string" || typeof prefix !== "string") {
+		return res.status(400).json({ error: "Invalid input" });
+	}
+	const result = text.startsWith(prefix);
+	res.json({ result });
+});
+
 app.listen(PORT, () => {
 	console.log(`Server is running on port ${PORT}`);
 });
