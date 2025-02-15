@@ -61,9 +61,10 @@
           const resultIconDiv = document.getElementById("resultIcon");
 
           for (let i = 0; i < keys.length; i++){
-            resultDiv.innerHTML += keys[i] + "の結果";
+            resultDiv.innerHTML += keys[i] + "の結果：";
             const averageValueFn = (value) => value.reduce((acc, current) => acc + current, 0) / value.length;
             const averageValue = averageValueFn(JSON.parse(values[i]));
+            resultDiv.innerHTML += Math.floor(averageValue) + "点　";
             console.log(averageValue);
             // 点数に応じたアイコンの表示
             if (averageValue >= 70) {
@@ -78,7 +79,7 @@
           console.log("Score is null, unable to display icon.");
         }
       }
-  
+
       // ページロード時に結果を表示
       displayResult();
     } else {
@@ -89,9 +90,9 @@
     function restart() {
       localStorage.removeItem("aiueoData");
       window.location.href = "input"
-    
+
     }
   </script>
-  
+
 <%- contentFor("css") %>
 <link rel="stylesheet" href="/styles/result.css">
