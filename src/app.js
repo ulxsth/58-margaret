@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import dotenv from "dotenv";
 import express from "express";
 import expressEjsLayouts from "express-ejs-layouts";
 import { score } from "./domain/scoreByLLM.js";
@@ -7,7 +8,9 @@ import {
 	getRandomAI,
 	startsWithHiragana,
 } from "./domain/util.js";
+dotenv.config();
 const PORT = 8080;
+const baseURL = process.env.BASE_URL;
 
 const app = express();
 app.use(express.json());
@@ -38,7 +41,7 @@ app.get("/aiueo-sakubun/input", async (req, res) => {
 		yomi = await convertToYomi(word);
 	}
 
-	res.render("aiueo-sakubun/input", { word, yomi });
+	res.render("aiueo-sakubun/input", { baseURL, word, yomi });
 });
 
 app.get("/aiueo-sakubun/result", (req, res) => {
