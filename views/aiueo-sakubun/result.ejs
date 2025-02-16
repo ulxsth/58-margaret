@@ -39,6 +39,7 @@
   async function displayResult() {
     const fetchedData = await fetchScore(topic, inputs);
     const score = await fetchedData.json();
+    //console.log(score);
     if (score === null) {
       console.log("Score is null, unable to display result.");
       return;
@@ -46,17 +47,31 @@
 
     const keys = Object.keys(score);
     const values = Object.values(score);
-
+   // console.log(values)
     // 結果表示エリアに結果を表示
     const resultIconDiv = document.getElementById("resultIcon");
     for (let i = 0; i < keys.length; i++) {
+
+      const result = values[i].slice(1, -1).split(',');
+
+      const [scoreArray, comment] = [result.slice(0, -1), result[result.length - 1]];
+
+      const numericArray = scoreArray
+      .map(item => Number(item)) // 数値に変換
+      .filter(item => !isNaN(item)); // 数値以外を除外
+
+      // 数値がない場合は null を返す
+      if (numericArray.length === 0) return null;
+      //console.log(scoreArray);
       // 点数の平均値を計算
-      const averageValueFn = (value) => value.reduce((acc, current) => acc + current, 0) / value.length;
-      const averageValue = averageValueFn(JSON.parse(values[i]));
+      const averageValueFn = (numberArray) => numberArray.reduce((acc, current) => acc + current, 0) / numberArray.length;
+      const averageValue = averageValueFn(numericArray);
 
       // 点数の表示
       resultDiv.innerHTML += keys[i] + "の結果：";
       resultDiv.innerHTML += Math.floor(averageValue) + "点　";
+
+      resultDiv.innerHTML += `<p>${comment.replace(/'/g, '')}</p>`;
 
       // 点数に応じたアイコンの表示
       if (averageValue >= 70) {
