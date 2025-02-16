@@ -1,6 +1,5 @@
 {
 	"name": "58-margaret",
-	"type": "module",
 	"scripts": {
 		"dev": "nodemon src/app.js",
 		"build": "babel src -d build",
