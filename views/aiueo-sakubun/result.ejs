@@ -70,7 +70,7 @@
       // 点数の平均値を計算
       const averageValueFn = (numberArray) => numberArray.reduce((acc, current) => acc + current, 0) / numberArray.length;
       const averageValue = averageValueFn(numericArray);
-
+      console.log(averageValue);
       // 点数の表示
       resultDiv.innerHTML += keys[i] + "の結果：";
       resultDiv.innerHTML += Math.floor(averageValue) + "点　";
@@ -90,7 +90,7 @@
         
       } else {
         resultIconDiv.innerHTML += "😐";
-        <!-- resultImageDiv.innerHTML = '<img src="/assets/images/ai.png" alt="真顔イメージ">'; -->
+
       }
     }
   }
