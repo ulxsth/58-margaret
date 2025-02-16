@@ -2,111 +2,106 @@
   <link rel="stylesheet" href="/assets/styles/global.css">
 </head>
 <h1>あいうえお作文 ゲーム</h1>
-  <!-- お題表示エリア -->
-  <div id="topicDisplay"></div>
+<!-- お題表示エリア -->
+<div id="topicDisplay"></div>
 
-  <!-- 入力フォーム -->
-  <form id="aiueoForm">
-    <div id="inputFields"></div>
-    <button type="button" onclick="submitForm()">送信</button>
-  </form>
+<!-- 入力フォーム -->
+<form id="aiueoForm">
+  <div id="inputFields"></div>
+  <button type="button" onclick="submitForm()">送信</button>
+</form>
 
-  <div class="security-icon">🔒</div>
+<div class="security-icon">🔒</div>
 
-  <script>
+<script>
 
-    // ランダムにお題を選ぶ
-    const topic = "<%= word %>";
-    const yomi = "<%= yomi %>";
-    const baseUrl = "<%= baseURL %>";
-    document.getElementById("topicDisplay").innerHTML = "<p>お題: " + topic + "</p>";
+  // ランダムにお題を選ぶ
+  const topic = "<%= word %>";
+  const yomi = "<%= yomi %>";
+  const baseUrl = "<%= baseURL %>";
+  document.getElementById("topicDisplay").innerHTML = "<p>お題: " + topic + "</p>";
 
-    // お題の各文字に対応する入力欄を作成する
-    const inputFieldsDiv = document.getElementById("inputFields");
+  // お題の各文字に対応する入力欄を作成する
+  const inputFieldsDiv = document.getElementById("inputFields");
+  for (let i = 0; i < yomi.length; i++) {
+    const char = yomi[i];
+
+    // ラベル作成
+    const label = document.createElement("label");
+    label.textContent = char + "：";
+
+    // 入力欄作成
+    const input = document.createElement("input");
+    input.type = "text";
+    input.id = "input" + i;
+    input.name = "input" + i;
+
+    // 入力欄とラベルをフォームに追加
+    inputFieldsDiv.appendChild(label);
+    inputFieldsDiv.appendChild(input);
+    inputFieldsDiv.appendChild(document.createElement("br"));
+  }
+
+  // 送信ボタン押下時の処理
+  async function submitForm() {
+    // 入力された内容を配列に格納
+    const inputs = [];
     for (let i = 0; i < yomi.length; i++) {
-      const char = yomi[i];
-
-      // ラベル作成
-      const label = document.createElement("label");
-      label.textContent = char + "：";
-
-      // 入力欄作成
-      const input = document.createElement("input");
-      input.type = "text";
-      input.id = "input" + i;
-      input.name = "input" + i;
-
-      // 入力欄とラベルをフォームに追加
-      inputFieldsDiv.appendChild(label);
-      inputFieldsDiv.appendChild(input);
-      inputFieldsDiv.appendChild(document.createElement("br"));
-    }
-
-    // 送信ボタン押下時の処理
-    async function submitForm() {
-      // 入力された内容を配列に格納
-      const inputs = [];
-      for (let i = 0; i < yomi.length; i++) {
-        const inputVal = document.getElementById("input" + i).value;
-        if (!inputVal || !inputVal.trim()) {
-          alert("すべての入力を記入してください");
-          return; // 入力が空または空白の場合、処理を中断する
-        }
-
-        // 各行が指定された文字から始まっているかをチェック
-        let prefix = yomi.charAt(i);
-        const smallCaseToUpperCase = {
-          'ァ': 'ア',
-          'ィ': 'イ',
-          'ゥ': 'ウ',
-          'ェ': 'エ',
-          'ォ': 'オ',
-          'ッ': 'ツ',
-          'ャ': 'ヤ',
-          'ュ': 'ユ',
-          'ョ': 'ヨ'
-        }
-        if (smallCaseToUpperCase[prefix]){
-          prefix = smallCaseToUpperCase[prefix];
-        }
-        console.log(prefix);
-        const response = await fetch('http://localhost:8080/api/v1/starts-with', {
-
-        const prefix = yomi.charAt(i);
-        const response = await fetch(`${baseUrl}/api/v1/starts-with`, {
-
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ text: inputVal, prefix })
-        });
-        const result = await response.json();
-        console.log(result);
-
-
-        if (!result) {
-          alert(`入力が「${prefix}」から始まっていません: ${inputVal}`);
-          return; // 入力が指定された文字から始まっていない場合、処理を中断する
-        }
-
-        inputs.push(inputVal);
+      const inputVal = document.getElementById("input" + i).value;
+      if (!inputVal || !inputVal.trim()) {
+        alert("すべての入力を記入してください");
+        return; // 入力が空または空白の場合、処理を中断する
       }
 
-      // 保存するデータをオブジェクトにまとめる
-      const formData = {
-        topic: topic,
-        topicYomi: yomi,
-        inputs: inputs
-      };
+      // 各行が指定された文字から始まっているかをチェック
+      let prefix = yomi.charAt(i);
+      const smallCaseToUpperCase = {
+        'ァ': 'ア',
+        'ィ': 'イ',
+        'ゥ': 'ウ',
+        'ェ': 'エ',
+        'ォ': 'オ',
+        'ッ': 'ツ',
+        'ャ': 'ヤ',
+        'ュ': 'ユ',
+        'ョ': 'ヨ'
+      }
+      if (smallCaseToUpperCase[prefix]) {
+        prefix = smallCaseToUpperCase[prefix];
+      }
+      console.log(prefix);
+      const response = await fetch(`${baseUrl}/api/v1/starts-with`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ text: inputVal, prefix })
+      });
+      const result = await response.json();
+      console.log(result);
 
-      // localStorageにJSON文字列として保存
-      localStorage.setItem("aiueoData", JSON.stringify(formData));
+      if (!result) {
+        alert(`入力が「${prefix}」から始まっていません: ${inputVal}`);
+        return; // 入力が指定された文字から始まっていない場合、処理を中断する
+      }
 
-      // 結果ページに遷移
-      window.location.href = `/aiueo-sakubun/result`;
+      inputs.push(inputVal);
     }
-  </script>
+
+    // 保存するデータをオブジェクトにまとめる
+    const formData = {
+      topic: topic,
+      topicYomi: yomi,
+      inputs: inputs
+    };
+
+    // localStorageにJSON文字列として保存
+    localStorage.setItem("aiueoData", JSON.stringify(formData));
+
+    // 結果ページに遷移
+    window.location.href = `/aiueo-sakubun/result`;
+  }
+</script>
 
 <%- contentFor("css") %>
-<link rel="stylesheet" href="/styles/input.css">
+  <link rel="stylesheet" href="/styles/input.css">
