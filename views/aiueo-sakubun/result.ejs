@@ -1,11 +1,15 @@
 <head>
   <link rel="stylesheet" href="/assets/styles/result.css">
 </head>
+<body class="result-background">
 <h1>採点結果</h1>
-<!-- 採点結果表示エリア -->
-<div id="resultDisplay"></div>
-<div id="resultIcon" class="result-icon"></div>
-<button onclick="onRestart()">もう一度挑戦する</button>
+  <!-- 採点結果表示エリア -->
+  <div id="resultCard" class="result-card">
+    <div id="resultDisplay"></div>
+    <div id="resultIcon" class="result-icon"></div>
+    <div id="resultImage" class="result-image"></div>
+  </div>
+  <button onclick="onRestart()">もう一度挑戦する</button>
 
 <script>
   // localStorageからデータを取得
@@ -73,11 +77,17 @@
 
       resultDiv.innerHTML += `<p>${comment.replace(/'/g, '')}</p>`;
 
-      // 点数に応じたアイコンの表示
-      if (averageValue >= 70) {
-        resultIconDiv.innerHTML += "😊";
-      } else if (averageValue <= 40) {
-        resultIconDiv.innerHTML += "🤖";
+      // 点数に応じたアイコンと背景イラストの表示
+      const resultIconDiv = document.getElementById("resultIcon");
+      const resultImageDiv = document.getElementById("resultImage");
+      if (score >= 70) {
+        resultIconDiv.innerHTML += "😊";  // 人間のマーク
+        resultImageDiv.innerHTML += '<img src="/assets/images/happy.png" alt="高得点イメージ">';
+        resultImageDiv.innerHTML += '<img src="/assets/images/congratulations.png" alt="おめでとうイラスト">';
+      } else if (score <= 40) {
+        resultIconDiv.innerHTML = "🤖";  // AIのマーク
+        resultImageDiv.innerHTML = '<img src="/assets/images/ai.png" alt="低得点イメージ">';
+        resultImageDiv.innerHTML += '<img src="/assets/images/sorry.png" alt="残念イラスト">';
       } else {
         resultIconDiv.innerHTML += "😐";
       }
@@ -109,4 +119,4 @@
 </script>
 
 <%- contentFor("css") %>
-  <link rel="stylesheet" href="/styles/result.css">
+<link rel="stylesheet" href="/styles/result.css">
