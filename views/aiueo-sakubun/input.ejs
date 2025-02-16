@@ -54,9 +54,27 @@
         }
 
         // 各行が指定された文字から始まっているかをチェック
-        // TODO: baseUrl に差し替え
+        let prefix = yomi.charAt(i);
+        const smallCaseToUpperCase = {
+          'ァ': 'ア',
+          'ィ': 'イ',
+          'ゥ': 'ウ',
+          'ェ': 'エ',
+          'ォ': 'オ',
+          'ッ': 'ツ',
+          'ャ': 'ヤ',
+          'ュ': 'ユ',
+          'ョ': 'ヨ'
+        }
+        if (smallCaseToUpperCase[prefix]){
+          prefix = smallCaseToUpperCase[prefix];
+        }
+        console.log(prefix);
+        const response = await fetch('http://localhost:8080/api/v1/starts-with', {
+
         const prefix = yomi.charAt(i);
         const response = await fetch(`${baseUrl}/api/v1/starts-with`, {
+
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
