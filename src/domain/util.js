@@ -5,9 +5,6 @@ import { tokenize } from "kuromojin";
  *
  * @return 「あい」から始まる単語
  */
-
-// TODO: 出力から，「・」，「=」の除去
-// TODO: 文字数制限
 export async function getRandomAI() {
 	// 取得するページ番号の最大値
 	const maxPage = 170;

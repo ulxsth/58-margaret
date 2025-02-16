@@ -1,11 +1,13 @@
 {
 	"name": "58-margaret",
+	"type": "module",
 	"scripts": {
 		"dev": "nodemon src/app.js",
 		"build": "babel src -d build",
 		"start": "node build/app.js",
 		"test": "NODE_OPTIONS=--experimental-vm-modules jest",
-		"format:fix": "npx @biomejs/biome check --write"
+		"format:fix": "npx @biomejs/biome check --write",
+		"generate-words": "node --max-old-space-size=4096 scripts/fetchWordDict.js"
 	},
 	"devDependencies": {
 		"@babel/cli": "^7.26.4",
@@ -22,7 +24,10 @@
 		"ejs": "^3.1.10",
 		"express": "^4.21.2",
 		"express-ejs-layouts": "^2.5.1",
+		"fast-xml-parser": "^4.5.1",
 		"groq-sdk": "^0.15.0",
-		"kuromojin": "^3.0.0"
+		"kuromojin": "^3.0.0",
+		"unbzip2-stream": "^1.4.3",
+		"xml2js": "^0.6.2"
 	}
 }
