@@ -1,4 +1,3 @@
-import { json } from "express";
 import { tokenize } from "kuromojin";
 /**
  * 「あい」から始まる単語をランダムに返す関数。
@@ -6,9 +5,6 @@ import { tokenize } from "kuromojin";
  *
  * @return 「あい」から始まる単語
  */
-
-// TODO: 出力から，「・」，「=」の除去
-// TODO: 文字数制限
 export async function getRandomAI() {
 	// 取得するページ番号の最大値
 	const maxPage = 170;
@@ -55,14 +51,9 @@ export async function startsWithHiragana(text, excepted) {
 		throw new Error("引数が不正です");
 	}
 
-	if (excepted.length !== 1 || !isHiragana(excepted)) {
-		throw new Error("excepted は1文字の平仮名である必要があります");
-	}
-
 	const yomi = await convertToYomi(text);
-	const hiragana = kanaToHira(yomi);
-	console.log(hiragana);
-	return hiragana.startsWith(excepted);
+	const exceptedKana = hiraToKana(excepted);
+	return yomi.startsWith(exceptedKana);
 }
 
 /**
@@ -70,7 +61,7 @@ export async function startsWithHiragana(text, excepted) {
  * @param {string} text 変換対象の文字列
  * @returns 読み（カタカナ）に変換された文字列
  */
-async function convertToYomi(text) {
+export async function convertToYomi(text) {
 	return tokenize(text).then((tokens) => {
 		return tokens
 			.map((token) => {
@@ -83,6 +74,13 @@ async function convertToYomi(text) {
 function kanaToHira(str) {
 	return str.replace(/[\u30a1-\u30f6]/g, (match) => {
 		const chr = match.charCodeAt(0) - 0x60;
+		return String.fromCharCode(chr);
+	});
+}
+
+function hiraToKana(str) {
+	return str.replace(/[\u3041-\u3096]/g, (match) => {
+		const chr = match.charCodeAt(0) + 0x60;
 		return String.fromCharCode(chr);
 	});
 }
