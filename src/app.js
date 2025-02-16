@@ -1,3 +1,4 @@
+import fs from "node:fs";
 import express from "express";
 import expressEjsLayouts from "express-ejs-layouts";
 import { score } from "./domain/scoreByLLM.js";
@@ -6,7 +7,6 @@ import {
 	getRandomAI,
 	startsWithHiragana,
 } from "./domain/util.js";
-import fs from 'fs';
 const PORT = 8080;
 
 const app = express();
@@ -23,14 +23,15 @@ app.get("/", (req, res) => {
 });
 
 app.get("/aiueo-sakubun/input", async (req, res) => {
-	let word, yomi;
-	if (fs.existsSync('./wordDict.json')) {
-		const wordDict = JSON.parse(fs.readFileSync('./wordDict.json', 'utf8'));
+	let word;
+	let yomi;
+	if (fs.existsSync("./wordDict.json")) {
+		const wordDict = JSON.parse(fs.readFileSync("./wordDict.json", "utf8"));
 		const randomWord = wordDict[Math.floor(Math.random() * wordDict.length)];
 		word = randomWord.word;
 		yomi = randomWord.yomi;
 	} else {
-		console.log('wordDict.json not exists. use api altanatively');
+		console.log("wordDict.json not exists. use api altanatively");
 
 		const data = await getRandomAI();
 		word = data.japanese[0].word ?? data.japanese[0].reading;
@@ -51,8 +52,8 @@ app.get("/aiueo-sakubun/result", (req, res) => {
  */
 app.get("/api/v1/word", async (req, res) => {
 	let data;
-	if (fs.existsSync('./wordDict.json')) {
-		const wordDict = JSON.parse(fs.readFileSync('./wordDict.json', 'utf8'));
+	if (fs.existsSync("./wordDict.json")) {
+		const wordDict = JSON.parse(fs.readFileSync("./wordDict.json", "utf8"));
 		data = wordDict[Math.floor(Math.random() * wordDict.length)];
 	} else {
 		data = await getRandomAI();
