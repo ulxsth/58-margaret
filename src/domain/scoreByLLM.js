@@ -6,7 +6,7 @@ import askLLM from "../infra/LLM.js";
  * @return {Map<string, number[]>} 各LLMの名前と、LLMの採点結果（3項目それぞれ）を持つMap
  */
 
-const useLLM = ["gemini", "groq"];
+const useLLM = ["gpt","gemini", "groq"];
 const result = {};
 
 export async function score(formData) {
@@ -46,6 +46,9 @@ export async function score(formData) {
 // };
 
 // const output = await score(formData);
+// console.log('=====================');
+// console.log(output.gpt);
+// console.log('=====================');
 // console.log(output.gemini);
 // console.log('=====================');
 // console.log(output.groq);
