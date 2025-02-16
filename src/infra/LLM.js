@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import Groq from "groq-sdk";
+import axios from "axios";
 /**
  * LLM API に問い合わせる関数。
  * @param {string} model - 使用するモデルの名前。
@@ -26,7 +27,26 @@ export default async function askLLM(model, prompt, options = {}) {
 	}
 }
 
-async function askGPT() {}
+export async function askGPT(prompt) {
+	const apiUrl = 'https://api.openai.com/v1/chat/completions';
+	try {
+    const response = await axios.post(apiUrl, {
+      model: 'gpt-3.5-turbo',  // 使用するGPTのモデル
+      messages: [{ role: 'user', content: prompt }],
+    }, {
+      headers: {
+        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    // レスポンスをコンソールに表示
+    // console.log(response.data.choices[0].message.content);
+		return response.data.choices[0].message.content
+  } catch (error) {
+    console.error('Error calling OpenAI API:', error);
+  }
+}
 
 // gemini
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
