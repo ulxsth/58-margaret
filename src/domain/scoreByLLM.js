@@ -26,10 +26,10 @@ export async function score(formData) {
 	${text}
 	
 	### 出力フォーマット:
-	以下のように関連性，面白さ，表現よくについて配列の形式で出力だけしてください。
+	以下のように関連性，面白さ，表現力について配列の形式で出力だけしてください。最後に採点の際のコメントも一文で配列に加える．
 	例
- [100, 90, 95]
-
+ [100, 90, 95, 'あいうえおの字を使った独創的な表現は、関連性と面白さをある程度保っていますが、文章全体の流れと言葉の選び方がやや単調で、表現力が不足しています。さらに、最後の単語"るーぷ"の使用が少し疑問符を残すため、その部分に何らかの説明や、よりスムーズな結び方が必要かもしれません。']
+	
 	`;
 
 	for (let i = 0; i < useLLM.length; i++) {
@@ -47,4 +47,5 @@ export async function score(formData) {
 
 // const output = await score(formData);
 // console.log(output.gemini);
+// console.log('=====================');
 // console.log(output.groq);
