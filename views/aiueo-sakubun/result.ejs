@@ -80,16 +80,17 @@
       // 点数に応じたアイコンと背景イラストの表示
       const resultIconDiv = document.getElementById("resultIcon");
       const resultImageDiv = document.getElementById("resultImage");
-      if (score >= 70) {
+      if (averageValue >= 70) {
         resultIconDiv.innerHTML += "😊";  // 人間のマーク
         resultImageDiv.innerHTML += '<img src="/assets/images/happy.png" alt="高得点イメージ">';
-        resultImageDiv.innerHTML += '<img src="/assets/images/congratulations.png" alt="おめでとうイラスト">';
-      } else if (score <= 40) {
+
+      } else if (averageValue <= 40) {
         resultIconDiv.innerHTML = "🤖";  // AIのマーク
         resultImageDiv.innerHTML = '<img src="/assets/images/ai.png" alt="低得点イメージ">';
-        resultImageDiv.innerHTML += '<img src="/assets/images/sorry.png" alt="残念イラスト">';
+        
       } else {
         resultIconDiv.innerHTML += "😐";
+        <!-- resultImageDiv.innerHTML = '<img src="/assets/images/ai.png" alt="真顔イメージ">'; -->
       }
     }
   }
