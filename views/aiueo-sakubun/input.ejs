@@ -16,8 +16,9 @@
   <script>
 
     // ランダムにお題を選ぶ
-    const topic = "<%= word %>"
-    const yomi = "<%= yomi %>"
+    const topic = "<%= word %>";
+    const yomi = "<%= yomi %>";
+    const baseUrl = "<%= baseURL %>";
     document.getElementById("topicDisplay").innerHTML = "<p>お題: " + topic + "</p>";
 
     // お題の各文字に対応する入力欄を作成する
@@ -55,7 +56,7 @@
         // 各行が指定された文字から始まっているかをチェック
         // TODO: baseUrl に差し替え
         const prefix = yomi.charAt(i);
-        const response = await fetch('http://localhost:8080/api/v1/starts-with', {
+        const response = await fetch(`${baseUrl}/api/v1/starts-with`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
