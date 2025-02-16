@@ -5,5 +5,5 @@ const formData = {
 
 const output = await score(formData);
 console.log(output.gemini);
-console.log('=====================');
+console.log("=====================");
 console.log(output.groq);
